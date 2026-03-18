@@ -3,6 +3,7 @@ const path = require('path')
 const sqlite3 = require('sqlite3').verbose()
 const puppeteer = require('puppeteer')
 
+
 // =======================
 // DATABASE
 // =======================
@@ -91,7 +92,14 @@ const filePath = `${folder}/${data.name.replace(/ /g,'_')}.pdf`
 // GENERATE PDF FROM HTML
 // =======================
 
-const browser = await puppeteer.launch()
+//const browser = await puppeteer.launch()
+
+
+const browser = await puppeteer.launch({
+  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+});
+
+
 const page = await browser.newPage()
 
 await page.setContent(`
