@@ -76,6 +76,8 @@ res.render('preview',{data})
 
 exports.generateID = async (req,res)=>{
 
+const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
+
 const data = req.body
 const photo = data.photo
 
@@ -96,9 +98,9 @@ const filePath = `${folder}/${data.name.replace(/ /g,'_')}.pdf`
 
 
 const browser = await puppeteer.launch({
+  headless: "new",
   args: ["--no-sandbox", "--disable-setuid-sandbox"],
-});
-
+})
 
 const page = await browser.newPage()
 
@@ -429,7 +431,7 @@ margin-bottom:2px;
 
 <div class="card-header">
 
-<img src="http://localhost:3000/images/logo.jpeg" class="school-logo">
+<img src="${BASE_URL}/images/logo.jpeg" class="school-logo">
 
 <div class="school-text">
 <h3>ST. XAVIER'S HIGH SCHOOL</h3>
@@ -439,8 +441,7 @@ margin-bottom:2px;
 </div>
 
 <div class="photo-area">
-
-<img src="http://localhost:3000/uploads/${photo}" class="student-photo">
+<img src="${BASE_URL}/uploads/${photo}" class="student-photo">
 
 <h4 class="student-name">${data.name}</h4>
 <p class="student-role">STUDENT</p>
