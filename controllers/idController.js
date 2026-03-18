@@ -100,7 +100,7 @@ const filePath = `${folder}/${data.name.replace(/ /g,'_')}.pdf`
 const browser = await puppeteer.launch({
   headless: "new",
   args: ["--no-sandbox", "--disable-setuid-sandbox"],
-})
+});
 
 const page = await browser.newPage()
 
