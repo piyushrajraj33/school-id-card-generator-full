@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>ID Card Preview</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="header-left">
+
+<div class="logo-icon">
+🎓
+</div>
+
+<div>
+<h1>School ID Card Generator</h1>
+<p>Generate your student identity card</p>
+</div>
+
+</div>
+
+</header>
+
+
+<div class="page">
+
+<div class="preview-container">
+
+<h2>ID Card Preview</h2>
+
+
+<div class="id-card">
+
+<div class="card-header">
+
+<img src="/images/logo.jpeg" class="school-logo">
+
+<div class="school-text">
+<h3>ST. XAVIER'S HIGH SCHOOL</h3>
+<p>195, Khandagiri, Bhubaneswar</p>
+</div>
+
+</div>
+
+
+<div class="photo-area">
+
+<img src="/uploads/<%= data.photo %>" class="student-photo">
+
+<h4 class="student-name"><%= data.name %></h4>
+<p class="student-role">STUDENT</p>
+
+</div>
+
+
+<div class="details">
+
+<div class="row"><span>Blood Group :</span> <span><%= data.blood %></span></div>
+
+<div class="row"><span>Class :</span> <span><%= data.class %> - <%= data.section %></span></div>
+
+<div class="row"><span>Roll No. :</span> <span><%= data.roll %></span></div>
+
+<div class="row"><span>Father's Name :</span> <span><%= data.father %></span></div>
+
+<div class="row"><span>Mother's Name :</span> <span><%= data.mother %></span></div>
+
+<div class="row"><span>Contact No. :</span>  <span><%= data.contact %></span> </div>
+
+<div class="row"><span>Address</span></div>
+<div class="value"><%= data.address %></div>
+
+</div>
+
+<div class="card-footer">
+
+<p>Valid for Academic Year 2026-2027</p>
+
+<div class="principal">
+<div class="line"></div>
+<span>Principal</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="buttons">
+
+<form action="/edit" method="POST">
+
+<input type="hidden" name="name" value="<%= data.name %>">
+<input type="hidden" name="class" value="<%= data.class %>">
+<input type="hidden" name="section" value="<%= data.section %>">
+<input type="hidden" name="roll" value="<%= data.roll %>">
+<input type="hidden" name="blood" value="<%= data.blood %>">
+<input type="hidden" name="father" value="<%= data.father %>">
+<input type="hidden" name="mother" value="<%= data.mother %>">
+<input type="hidden" name="contact" value="<%= data.contact %>">
+<input type="hidden" name="address" value="<%= data.address %>">
+<input type="hidden" name="photo" value="<%= data.photo %>">
+
+<button class="btn-light">Edit Information</button>
+
+</form>
+
+<form action="/submit" method="POST">
+
+<input type="hidden" name="name" value="<%= data.name %>">
+<input type="hidden" name="class" value="<%= data.class %>">
+<input type="hidden" name="section" value="<%= data.section %>">
+<input type="hidden" name="roll" value="<%= data.roll %>">
+<input type="hidden" name="blood" value="<%= data.blood %>">
+<input type="hidden" name="father" value="<%= data.father %>">
+<input type="hidden" name="mother" value="<%= data.mother %>">
+<input type="hidden" name="contact" value="<%= data.contact %>">
+<input type="hidden" name="address" value="<%= data.address %>">
+<input type="hidden" name="photo" value="<%= data.photo %>">
+
+<button class="btn-dark">Confirm & Submit</button>
+
+</form>
+
+</div>
+
+
+<div class="note-box">
+
+<strong>Note:</strong> Please review the ID card carefully. Once confirmed, the data will be ready for processing.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<footer>
+School ID Card Management System © 2026
+</footer>
+
+</body>
+</html>

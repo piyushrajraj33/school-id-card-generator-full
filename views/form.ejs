@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="header-left">
+
+<div class="logo-icon">
+🎓
+</div>
+
+<div>
+<h1>School ID Card Generator</h1>
+<p>Generate your student identity card</p>
+</div>
+
+</div>
+
+</header>
+
+
+<div class="page">
+
+<div class="form-card">
+
+<h2>Student Information Form</h2>
+
+<form action="/preview" method="POST" enctype="multipart/form-data">
+
+<label>Student Photo</label>
+
+<div class="photo-row">
+
+<div class="photo-box">
+
+<% if (typeof data !== "undefined" && data.photo) { %>
+
+<img src="/uploads/<%= data.photo %>" id="previewImg" style="display:block">
+
+<div class="photo-placeholder" id="photoPlaceholder" style="display:none">
+
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.8">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4 20c1.5-4 6-6 8-6s6.5 2 8 6"></path>
+</svg>
+
+</div>
+
+<% } else { %>
+
+<img id="previewImg" style="display:none">
+
+<div class="photo-placeholder" id="photoPlaceholder">
+
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.8">
+<circle cx="12" cy="8" r="4"></circle>
+<path d="M4 20c1.5-4 6-6 8-6s6.5 2 8 6"></path>
+</svg>
+
+</div>
+
+<% } %>
+
+</div>
+
+<label class="upload-btn">
+
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+<path d="M12 16V4"></path>
+<path d="M7 9l5-5 5 5"></path>
+<path d="M5 20h14"></path>
+</svg>
+
+Upload Photo
+
+
+<input type="file" name="photo" id="photoInput" hidden required>
+</label>
+
+</div>
+
+
+<label>Full Name</label>
+<input 
+name="name" 
+placeholder="Enter student's full name" 
+value="<%= typeof data !== 'undefined' ? data.name : '' %>" 
+required>
+
+
+<div class="grid3">
+
+<div>
+<label>Class</label>
+
+<select name="class">
+
+<option>Select</option>
+
+<% for(let i=1;i<=12;i++){ %>
+
+<option value="<%= i %>" <%= (typeof data !== 'undefined' && data.class == i) ? 'selected' : '' %> >
+Class <%= i %>
+</option>
+
+<% } %>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Section</label>
+
+<select name="section">
+
+<option>Select</option>
+
+<% ['Section A','Section B','Section C','Section D','Section E'].forEach(function(sec){ %>
+
+<option value="<%= sec %>" <%= (typeof data !== 'undefined' && data.section == sec) ? 'selected' : '' %> >
+<%= sec %>
+</option>
+
+<% }) %>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Roll Number</label>
+
+<input 
+name="roll" 
+placeholder="e.g., 001"
+value="<%= typeof data !== 'undefined' ? data.roll : '' %>">
+
+</div>
+
+</div>
+
+
+<label>Blood Group</label>
+
+<select name="blood">
+
+<option>Select blood group</option>
+
+<% ['A+','A-','B+','B-','AB+','AB-','O+','O-'].forEach(function(bg){ %>
+
+<option value="<%= bg %>" <%= (typeof data !== 'undefined' && data.blood == bg) ? 'selected' : '' %> >
+<%= bg %>
+</option>
+
+<% }) %>
+
+</select>
+
+
+<label>Mother's Name</label>
+
+<input 
+name="mother" 
+placeholder="Enter mother's full name"
+value="<%= typeof data !== 'undefined' ? data.mother : '' %>">
+
+
+<label>Father's Name</label>
+
+<input 
+name="father" 
+placeholder="Enter father's full name"
+value="<%= typeof data !== 'undefined' ? data.father : '' %>">
+
+
+<label>Contact Number</label>
+
+<input 
+type="tel"
+name="contact"
+placeholder="Enter 10 digit mobile number"
+value="<%= typeof data !== 'undefined' ? data.contact : '' %>"
+pattern="[0-9]{10}"
+maxlength="10"
+inputmode="numeric"
+required>
+<label>Address</label>
+
+<textarea 
+name="address" 
+placeholder="Enter complete address"><%= typeof data !== 'undefined' ? data.address : '' %></textarea>
+
+
+<% if (typeof data !== "undefined" && data.photo) { %>
+
+<input type="hidden" name="photo" value="<%= data.photo %>">
+
+<% } %>
+
+
+<button class="submit-btn">
+Generate ID Card Preview
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+
+<footer>
+School ID Card Management System © 2026
+</footer>
+
+<script src="/js/photoPreview.js"></script>
+
+</body>
+</html>

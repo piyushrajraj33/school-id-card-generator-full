@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Success</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="header-left">
+
+<div class="logo-icon">
+🎓
+</div>
+
+<div>
+<h1>School ID Card Generator</h1>
+<p>Generate your student identity card</p>
+</div>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="success-card">
+
+<h2 class="success-title">ID Card Submitted Successfully!</h2>
+
+<p class="success-message">
+Your student information has been submitted successfully.
+The ID card data has been recorded and will be processed accordingly.
+</p>
+
+<div class="student-summary">
+
+<div class="summary-row">
+<span>Student Name:</span>
+<span><%= data.name %></span>
+</div>
+
+<div class="summary-row">
+<span>Class:</span>
+<span>Class <%= data.class %> - Section <%= data.section %></span>
+</div>
+
+<div class="summary-row">
+<span>Roll Number:</span>
+<span><%= data.roll %></span>
+</div>
+
+</div>
+
+<div class="actions">
+
+    <a href="/<%= pdf %>" class="download-btn" download>
+    Download ID Card PDF
+    </a>
+
+    <a href="/" class="submit-again-btn">
+    Submit Another Student
+    </a>
+
+</div>
+
+
+</div>
+
+</div>
+
+<footer>
+School ID Card Management System © 2026
+</footer>
+
+</body>
+</html>
