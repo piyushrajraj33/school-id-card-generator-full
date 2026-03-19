@@ -98,7 +98,7 @@ const filePath = `${folder}/${data.name.replace(/ /g,'_')}.pdf`
 
 const browser = await puppeteer.launch({
   headless: "new",
-  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
   args: ["--no-sandbox", "--disable-setuid-sandbox"],
 });
 
