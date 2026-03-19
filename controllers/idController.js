@@ -117,7 +117,7 @@ await page.setContent(`
 
 body{
 width:270px;
-height:500px;
+height:435px;
 margin:0;
 font-family:'Inter',sans-serif;
 margin:0;
@@ -486,7 +486,7 @@ margin-bottom:2px;
 await page.pdf({
 path:filePath,
 width:'270px',
-height:'500px',
+height:'435px',
 margin:{
 top:0,
 right:0,

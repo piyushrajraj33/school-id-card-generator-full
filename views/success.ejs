@@ -1,9 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Success</title>
+
 <link rel="stylesheet" href="/css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f3f4f6;
+}
+
+/* PAGE WRAPPER */
+.container{
+  padding:20px;
+  display:flex;
+  justify-content:center;
+}
+
+/* CARD */
+.success-card{
+  width:100%;
+  max-width:420px;
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  text-align:center;
+}
+
+/* TITLE */
+.success-title{
+  color:#16a34a;
+  margin-bottom:10px;
+  font-size:18px;
+}
+
+/* MESSAGE */
+.success-message{
+  font-size:14px;
+  color:#555;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+
+/* SUMMARY */
+.student-summary{
+  text-align:left;
+  margin-bottom:20px;
+  padding:12px;
+  background:#f9fafb;
+  border-radius:10px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+/* BUTTONS */
+.actions{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+
+/* BUTTON BASE */
+.download-btn,
+.submit-again-btn{
+  flex:1;
+  text-decoration:none;
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
+  text-align:center;
+}
+
+/* BUTTON COLORS */
+.download-btn{
+  background:#2563eb;
+  color:white;
+}
+
+.submit-again-btn{
+  background:#e5e7eb;
+  color:#111;
+}
+
+/* MOBILE FIX */
+@media(max-width:480px){
+
+  .container{
+    padding:15px;
+  }
+
+  .success-card{
+    padding:18px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .summary-row{
+    flex-direction:column;
+    gap:2px;
+  }
+
+}
+
+</style>
+
 </head>
 
 <body>
@@ -33,7 +154,7 @@
 
 <p class="success-message">
 Your student information has been submitted successfully.
-The ID card data has been recorded and will be processed accordingly.
+The ID card has been generated and saved.
 </p>
 
 <div class="student-summary">
@@ -57,16 +178,15 @@ The ID card data has been recorded and will be processed accordingly.
 
 <div class="actions">
 
-    <a href="/<%= pdf %>" class="download-btn" download>
-    Download ID Card PDF
-    </a>
+<a href="/<%= pdf %>" class="download-btn" download>
+Download PDF
+</a>
 
-    <a href="/" class="submit-again-btn">
-    Submit Another Student
-    </a>
+<a href="/" class="submit-again-btn">
+Add Another
+</a>
 
 </div>
-
 
 </div>
 

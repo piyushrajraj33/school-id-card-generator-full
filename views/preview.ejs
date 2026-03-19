@@ -3,11 +3,119 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ID Card Preview</title>
 
 <link rel="stylesheet" href="/css/style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f3f4f6;
+}
+
+/* PAGE WRAPPER */
+.page{
+  padding:20px;
+  display:flex;
+  justify-content:center;
+}
+
+/* CONTAINER */
+.preview-container{
+  width:100%;
+  max-width:480px;
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.preview-container h2{
+  margin-bottom:20px;
+  font-size:18px;
+  text-align:center;
+}
+
+/* ID CARD CENTER */
+.id-card{
+  width:260px;
+  margin:0 auto 20px;
+}
+
+/* BUTTONS */
+.buttons{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+}
+
+/* BUTTON BASE */
+.buttons form{
+  flex:1;
+}
+
+.btn-light,
+.btn-dark{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+/* BUTTON COLORS */
+.btn-light{
+  background:#e5e7eb;
+}
+
+.btn-dark{
+  background:#111827;
+  color:white;
+}
+
+/* NOTE BOX */
+.note-box{
+  margin-top:20px;
+  padding:14px;
+  background:#f9fafb;
+  border-radius:10px;
+  font-size:13px;
+  color:#555;
+}
+
+/* MOBILE FIX */
+@media(max-width:480px){
+
+  .page{
+    padding:15px;
+  }
+
+  .preview-container{
+    padding:16px;
+  }
+
+  .buttons{
+    flex-direction:column;
+  }
+
+  .id-card{
+    transform:scale(0.95);
+  }
+}
+
+</style>
 
 </head>
 
@@ -110,7 +218,7 @@
 <input type="hidden" name="address" value="<%= data.address %>">
 <input type="hidden" name="photo" value="<%= data.photo %>">
 
-<button class="btn-light">Edit Information</button>
+<button class="btn-light">Edit</button>
 
 </form>
 
@@ -135,9 +243,7 @@
 
 
 <div class="note-box">
-
-<strong>Note:</strong> Please review the ID card carefully. Once confirmed, the data will be ready for processing.
-
+<strong>Note:</strong> Please review the ID card carefully before confirming.
 </div>
 
 

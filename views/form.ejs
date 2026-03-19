@@ -3,38 +3,209 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="/css/style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== MOBILE FIRST ===== */
+
+body{
+  margin:0;
+  padding:0 12px;
+  font-family:'Inter',sans-serif;
+  background:#f3f4f6;
+}
+
+/* HEADER */
+.header{
+  padding:14px 12px;
+}
+*{
+  box-sizing: border-box;
+}
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-icon{
+  width:34px;
+  height:34px;
+  background:#2563eb;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:16px;
+}
+
+.header h1{
+  font-size:16px;
+  margin:0;
+}
+
+.header p{
+  font-size:12px;
+  margin:0;
+  color:#6b7280;
+}
+
+/* PAGE */
+.page{
+  padding:16px 0;
+  display:flex;
+  justify-content:center;
+}
+
+/* CARD */
+.form-card{
+  width:100%;
+  max-width:520px;
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.form-card h2{
+  font-size:16px;
+  margin-bottom:14px;
+}
+
+/* INPUTS */
+label{
+  display:block;
+  font-size:13px;
+  font-weight:500;
+  margin-top:12px;
+}
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+  margin-top:6px;
+}
+
+textarea{
+  resize:none;
+}
+
+/* GRID */
+.grid3{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+
+.grid3{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+@media(min-width:768px){
+  .grid3{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
+/* Desktop */
+@media(min-width:768px){
+  .grid3{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+}
+
+/* PHOTO */
+.photo-row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.photo-box{
+  width:90px;
+  height:110px;
+  border:2px dashed #d1d5db;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f9fafb;
+  overflow:hidden;
+}
+
+.photo-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* BUTTONS */
+.upload-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:#111827;
+  color:white;
+  padding:8px 14px;
+  border-radius:8px;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.submit-btn{
+  margin-top:18px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  font-size:12px;
+  color:#6b7280;
+  margin:20px 0;
+}
+
+</style>
 
 </head>
 
 <body>
 
 <header class="header">
-
 <div class="header-left">
-
-<div class="logo-icon">
-🎓
-</div>
+<div class="logo-icon">🎓</div>
 
 <div>
 <h1>School ID Card Generator</h1>
-<p>Generate your student identity card</p>
+<p>Generate student ID card</p>
 </div>
 
 </div>
-
 </header>
-
 
 <div class="page">
 
 <div class="form-card">
 
-<h2>Student Information Form</h2>
+<h2>Student Information</h2>
 
 <form action="/preview" method="POST" enctype="multipart/form-data">
 
@@ -48,172 +219,93 @@
 
 <img src="/uploads/<%= data.photo %>" id="previewImg" style="display:block">
 
-<div class="photo-placeholder" id="photoPlaceholder" style="display:none">
-
-<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.8">
-<circle cx="12" cy="8" r="4"></circle>
-<path d="M4 20c1.5-4 6-6 8-6s6.5 2 8 6"></path>
-</svg>
-
-</div>
-
 <% } else { %>
 
 <img id="previewImg" style="display:none">
 
-<div class="photo-placeholder" id="photoPlaceholder">
-
-<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.8">
-<circle cx="12" cy="8" r="4"></circle>
-<path d="M4 20c1.5-4 6-6 8-6s6.5 2 8 6"></path>
-</svg>
-
-</div>
+<div id="photoPlaceholder">📷</div>
 
 <% } %>
 
 </div>
 
 <label class="upload-btn">
-
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-<path d="M12 16V4"></path>
-<path d="M7 9l5-5 5 5"></path>
-<path d="M5 20h14"></path>
-</svg>
-
-Upload Photo
-
-
+Upload
 <input type="file" name="photo" id="photoInput" hidden required>
 </label>
 
 </div>
 
-
 <label>Full Name</label>
-<input 
-name="name" 
-placeholder="Enter student's full name" 
-value="<%= typeof data !== 'undefined' ? data.name : '' %>" 
-required>
-
+<input name="name" required
+value="<%= typeof data !== 'undefined' ? data.name : '' %>">
 
 <div class="grid3">
 
 <div>
 <label>Class</label>
-
 <select name="class">
-
 <option>Select</option>
-
 <% for(let i=1;i<=12;i++){ %>
-
-<option value="<%= i %>" <%= (typeof data !== 'undefined' && data.class == i) ? 'selected' : '' %> >
-Class <%= i %>
+<option value="<%= i %>" <%= (typeof data !== 'undefined' && data.class == i) ? 'selected' : '' %>>
+<%= i %>
 </option>
-
 <% } %>
-
 </select>
-
 </div>
 
 <div>
-
 <label>Section</label>
-
 <select name="section">
-
 <option>Select</option>
-
 <% ['Section A','Section B','Section C','Section D','Section E'].forEach(function(sec){ %>
-
-<option value="<%= sec %>" <%= (typeof data !== 'undefined' && data.section == sec) ? 'selected' : '' %> >
+<option value="<%= sec %>" <%= (typeof data !== 'undefined' && data.section == sec) ? 'selected' : '' %>>
 <%= sec %>
 </option>
-
 <% }) %>
-
 </select>
-
 </div>
 
 <div>
-
-<label>Roll Number</label>
-
-<input 
-name="roll" 
-placeholder="e.g., 001"
+<label>Roll No</label>
+<input name="roll"
 value="<%= typeof data !== 'undefined' ? data.roll : '' %>">
-
 </div>
 
 </div>
-
 
 <label>Blood Group</label>
-
 <select name="blood">
-
-<option>Select blood group</option>
-
+<option>Select</option>
 <% ['A+','A-','B+','B-','AB+','AB-','O+','O-'].forEach(function(bg){ %>
-
-<option value="<%= bg %>" <%= (typeof data !== 'undefined' && data.blood == bg) ? 'selected' : '' %> >
+<option value="<%= bg %>" <%= (typeof data !== 'undefined' && data.blood == bg) ? 'selected' : '' %>>
 <%= bg %>
 </option>
-
 <% }) %>
-
 </select>
 
-
 <label>Mother's Name</label>
-
-<input 
-name="mother" 
-placeholder="Enter mother's full name"
+<input name="mother"
 value="<%= typeof data !== 'undefined' ? data.mother : '' %>">
 
-
 <label>Father's Name</label>
-
-<input 
-name="father" 
-placeholder="Enter father's full name"
+<input name="father"
 value="<%= typeof data !== 'undefined' ? data.father : '' %>">
 
-
-<label>Contact Number</label>
-
-<input 
-type="tel"
-name="contact"
-placeholder="Enter 10 digit mobile number"
-value="<%= typeof data !== 'undefined' ? data.contact : '' %>"
+<label>Contact</label>
+<input type="tel" name="contact" required
 pattern="[0-9]{10}"
-maxlength="10"
-inputmode="numeric"
-required>
+value="<%= typeof data !== 'undefined' ? data.contact : '' %>">
+
 <label>Address</label>
-
-<textarea 
-name="address" 
-placeholder="Enter complete address"><%= typeof data !== 'undefined' ? data.address : '' %></textarea>
-
+<textarea name="address"><%= typeof data !== 'undefined' ? data.address : '' %></textarea>
 
 <% if (typeof data !== "undefined" && data.photo) { %>
-
 <input type="hidden" name="photo" value="<%= data.photo %>">
-
 <% } %>
 
-
 <button class="submit-btn">
-Generate ID Card Preview
+Preview ID Card
 </button>
 
 </form>
@@ -222,9 +314,8 @@ Generate ID Card Preview
 
 </div>
 
-
 <footer>
-School ID Card Management System © 2026
+© 2026 School ID System
 </footer>
 
 <script src="/js/photoPreview.js"></script>
