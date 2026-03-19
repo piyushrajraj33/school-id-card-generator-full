@@ -1,0 +1,11 @@
+const express = require('express')
+const router = express.Router()
+const adminController = require('../controllers/adminController')
+
+router.get('/', adminController.dashboard)
+router.get('/download-all', adminController.downloadAll)
+router.get('/edit/:id', adminController.editPage)
+router.post('/update/:id', adminController.updateStudent)
+router.get('/delete/:id', adminController.deleteStudent)
+
+module.exports = router
