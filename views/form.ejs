@@ -246,6 +246,9 @@ value="<%= typeof data !== 'undefined' ? data.name : '' %>">
 <label>Class</label>
 <select name="class">
 <option>Select</option>
+<option>M1</option>
+<option>M2</option>
+<option>M3</option>
 <% for(let i=1;i<=12;i++){ %>
 <option value="<%= i %>" <%= (typeof data !== 'undefined' && data.class == i) ? 'selected' : '' %>>
 <%= i %>
