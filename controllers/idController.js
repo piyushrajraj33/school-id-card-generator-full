@@ -19,6 +19,7 @@ name TEXT,
 class TEXT,
 section TEXT,
 roll TEXT,
+house TEXT,
 blood TEXT,
 father TEXT,
 mother TEXT,
@@ -117,7 +118,7 @@ await page.setContent(`
 
 body{
 width:270px;
-height:435px;
+height:445px;
 margin:0;
 font-family:'Inter',sans-serif;
 margin:0;
@@ -449,6 +450,8 @@ margin-bottom:2px;
 
 <div class="details">
 
+<div class="row"><span>House Colour:</span> <span>${data.house}</span></div>
+
 <div class="row"><span>Blood Group :</span> <span>${data.blood}</span></div>
 
 <div class="row"><span>Class :</span> <span>${data.class} - ${data.section}</span></div>
@@ -486,7 +489,7 @@ margin-bottom:2px;
 await page.pdf({
 path:filePath,
 width:'270px',
-height:'435px',
+height:'445px',
 margin:{
 top:0,
 right:0,
@@ -507,8 +510,8 @@ await browser.close()
 
 const sql = `
 INSERT INTO students
-(name,class,section,roll,blood,father,mother,contact,address,photo,pdf,date)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+(name,class,section,roll,house,blood,father,mother,contact,address,photo,pdf,date)
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
 `
 
 db.run(sql,[
@@ -516,6 +519,7 @@ data.name,
 data.class,
 data.section,
 data.roll,
+data.house,
 data.blood,
 data.father,
 data.mother,

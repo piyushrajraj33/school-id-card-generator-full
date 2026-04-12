@@ -9,7 +9,7 @@ const db = new sqlite3.Database('./data/students.db')
 // DASHBOARD (LIST)
 // =======================
 exports.dashboard = (req, res) => {
-  const { search, class: cls, section } = req.query
+  const { search, class: cls, section, house } = req.query
 
   let query = "SELECT * FROM students WHERE 1=1"
   let params = []
@@ -27,6 +27,11 @@ exports.dashboard = (req, res) => {
   if (section) {
     query += " AND section = ?"
     params.push(section)
+  }
+
+  if (house) {
+    query += " AND house = ?"
+    params.push(house)
   }
 
   query += " ORDER BY id DESC"
@@ -77,7 +82,7 @@ exports.updateStudent = (req, res) => {
 
   const sql = `
   UPDATE students SET
-  name=?, class=?, section=?, roll=?, blood=?, father=?, mother=?, contact=?, address=?
+  name=?, class=?, section=?, roll=?, house=?, blood=?, father=?, mother=?, contact=?, address=?
   WHERE id=?
   `
 
@@ -86,6 +91,7 @@ exports.updateStudent = (req, res) => {
     data.class,
     data.section,
     data.roll,
+    data.house,
     data.blood,
     data.father,
     data.mother,

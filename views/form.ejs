@@ -277,6 +277,18 @@ value="<%= typeof data !== 'undefined' ? data.roll : '' %>">
 
 </div>
 
+<label>House Colour</label>
+<select name="house" required>
+<option>Select House Colour</option>
+
+<% ['RED','GREEN','BLUE','YELLOW'].forEach(function(h){ %>
+<option value="<%= h %>" <%= (typeof data !== 'undefined' && data.house == h) ? 'selected' : '' %>>
+<%= h %>
+</option>
+<% }) %>
+
+</select>
+
 <label>Blood Group</label>
 <select name="blood">
 <option>Select</option>
