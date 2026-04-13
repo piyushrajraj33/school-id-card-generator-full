@@ -297,21 +297,45 @@ margin-bottom:5px;
 .card-footer{
 display:flex;
 justify-content:space-between;
-align-items:center;
+align-items:flex-end;
 padding:10px 15px;
 font-size:9px;
 color:#777;
 }
 
-.principal{
-text-align:right;
+/* LEFT SIDE */
+.academicyear p{
+margin:0;
+line-height:1.2;
 }
 
-.principal .line{
-width:60px;
-border-bottom:2px solid #4a90e2;
+.principal{
+display:flex;
+flex-direction:column;
+align-items:flex-end;
+width:100px;
+}
+
+.signature-img{
+width:80px;        /* reduced width */
+height:25px;       /* reduced height */
+object-fit:contain;
 margin-bottom:2px;
 }
+
+/* LINE */
+.principal .line{
+width:100%;
+border-bottom:2px solid #4a90e2;
+margin-bottom:3px;
+}
+
+/* TEXT */
+.principal span{
+white-space:nowrap;
+font-size:9px;
+}
+
 
 .buttons{
 display:flex;

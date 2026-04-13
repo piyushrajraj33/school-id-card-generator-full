@@ -118,7 +118,7 @@ await page.setContent(`
 
 body{
 width:270px;
-height:445px;
+height:465px;
 margin:0;
 font-family:'Inter',sans-serif;
 margin:0;
@@ -406,20 +406,43 @@ margin-bottom:5px;
 .card-footer{
 display:flex;
 justify-content:space-between;
-align-items:center;
+align-items:flex-end;
 padding:10px 15px;
 font-size:9px;
 color:#777;
 }
 
-.principal{
-text-align:right;
+/* LEFT SIDE */
+.academicyear p{
+margin:0;
+line-height:1.2;
 }
 
-.principal .line{
-width:60px;
-border-bottom:2px solid #4a90e2;
+.principal{
+display:flex;
+flex-direction:column;
+align-items:flex-end;
+width:100px;
+}
+
+.signature-img{
+width:80px;        /* reduced width */
+height:25px;       /* reduced height */
+object-fit:contain;
 margin-bottom:2px;
+}
+
+/* LINE */
+.principal .line{
+width:100%;
+border-bottom:2px solid #4a90e2;
+margin-bottom:3px;
+}
+
+/* TEXT */
+.principal span{
+white-space:nowrap;
+font-size:9px;
 }
 </style>
 
@@ -471,11 +494,15 @@ margin-bottom:2px;
 
 <div class="card-footer">
 
-<p>Valid for Academic Year 2026-2027</p>
+<div class="academicyear">
+<p>Valid for Academic</p>
+<p>Year 2026-2027</p>
+</div>
 
 <div class="principal">
-<div class="line"></div>
-<span>Principal's signature</span>
+  <img src="http://localhost:3000/images/principal_signature.png" class="signature-img">
+  <div class="line"></div>
+  <span>Principal's Signature</span>
 </div>
 
 </div>
@@ -489,7 +516,7 @@ margin-bottom:2px;
 await page.pdf({
 path:filePath,
 width:'270px',
-height:'445px',
+height:'465px',
 margin:{
 top:0,
 right:0,
