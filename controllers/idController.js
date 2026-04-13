@@ -475,7 +475,7 @@ margin-bottom:2px;
 
 <div class="principal">
 <div class="line"></div>
-<span>Principal</span>
+<span>Principal's signature</span>
 </div>
 
 </div>
