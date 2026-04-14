@@ -122,16 +122,45 @@ await page.setContent(`
   }
 }
 
-body{
-width:270px;
-height:465px;
-margin:0;
-font-family:'Inter',sans-serif;
-margin:0;
-background:linear-gradient(180deg,#eef2f7,#f7f8fb);
-color:#111;
+@page {
+  size: 53mm 85mm;
+  margin: 0;
 }
 
+html, body{
+  margin:0;
+  padding:0;
+  width:53mm;
+  height:85mm;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* CENTER CONTAINER */
+.page-wrapper{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* SCALE CARD PROPERLY */
+.id-card{
+width:260px;
+margin:auto;
+background:white;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
+overflow:hidden;
+transform: scale(0.69);   /* 🔥 increase from 0.5 → 0.9 */
+transform-origin: center;
+/* 🔥 CRITICAL */
+page-break-inside:avoid;
+break-inside:avoid;
+}
 
 .header{
 padding:20px 60px;
@@ -332,15 +361,7 @@ margin-bottom:20px;
 font-size:18px;
 }
 
-.id-card{
-width:260px;
-margin:auto;
-background:white;
-border-radius:14px;
-box-shadow:0 8px 20px rgba(0,0,0,0.12);
-overflow:hidden;
-page-break-inside:avoid;
-}
+
 
 .card-header{
 background:#0c3b6d;
@@ -392,7 +413,7 @@ color:#777;
 
 .details{
 font-size:11px;
-padding:0 18px;
+padding:0 10px;
 }
 
 .details .row{
@@ -402,18 +423,24 @@ margin-top:4px;
 color:#555;
 }
 .details .row span:first-child{
-min-width:110px;
+min-width:100px;
 }
 .value{
 margin-bottom:5px;
 
+/* 🔥 LIMIT ADDRESS HEIGHT */
+display:-webkit-box;
+-webkit-line-clamp:3;   /* max 3 lines */
+-webkit-box-orient:vertical;
+overflow:hidden;
+word-break:break-word;
 }
 
 .card-footer{
 display:flex;
 justify-content:space-between;
 align-items:flex-end;
-padding:10px 15px;
+padding:5px 5px;
 font-size:9px;
 color:#777;
 }
@@ -432,10 +459,10 @@ width:100px;
 }
 
 .signature-img{
-width:80px;        /* reduced width */
-height:25px;       /* reduced height */
+width:120px;        /* reduced width */
+height:35px;       /* reduced height */
 object-fit:contain;
-margin-bottom:2px;
+margin-bottom:1px;
 }
 
 /* LINE */
@@ -455,7 +482,7 @@ font-size:9px;
 </head>
 
 <body>
-
+<div class="wrapper">
 <div class="id-card">
 
 <div class="card-header">
@@ -514,23 +541,18 @@ font-size:9px;
 </div>
 
 </div>
-
+</div>
 </body>
 </html>
 `)
 
 await page.pdf({
-path:filePath,
-width:'270px',
-height:'465px',
-margin:{
-top:0,
-right:0,
-bottom:0,
-left:0
-},
-printBackground:true,
-preferCSSPageSize:true
+  path: filePath,
+  width: '53mm',
+  height: '85mm',
+  landscape: false,
+  margin: 0,
+  printBackground: true
 })
 
 
