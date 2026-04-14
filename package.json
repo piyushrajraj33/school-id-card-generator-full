@@ -4,7 +4,6 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "mkdir -p .amplify-hosting/compute/default && cp -r * .amplify-hosting/compute/default/ && cp deploy-manifest.json .amplify-hosting/deploy-manifest.json",
     "postinstall": "PUPPETEER_CACHE_DIR=./.cache npx puppeteer browsers install chrome"
   },
   "dependencies": {
