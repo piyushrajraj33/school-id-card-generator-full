@@ -153,7 +153,7 @@ width:260px;
 margin:auto;
 background:white;
 border-radius:14px;
-box-shadow:0 8px 20px rgba(0,0,0,0.12);
+box-shadow:0 8px 14px rgba(0,0,0,0.12);
 overflow:hidden;
 transform: scale(0.69);   /* 🔥 increase from 0.5 → 0.9 */
 transform-origin: center;
@@ -456,20 +456,21 @@ display:flex;
 flex-direction:column;
 align-items:flex-end;
 width:100px;
+gap:0;
 }
 
 .signature-img{
-width:120px;        /* reduced width */
-height:35px;       /* reduced height */
+width:95px;        /* reduced width */
+height:25px;       /* reduced height */
 object-fit:contain;
-margin-bottom:1px;
+margin-bottom:-2px;
 }
 
 /* LINE */
 .principal .line{
 width:100%;
-border-bottom:2px solid #4a90e2;
-margin-bottom:3px;
+border-bottom:1px solid #4a90e2;
+margin-bottom:2px;
 }
 
 /* TEXT */
