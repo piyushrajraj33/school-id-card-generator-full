@@ -325,8 +325,8 @@ value="<%= typeof data !== 'undefined' ? data.contact : '' %>">
 <label>Address</label>
 <textarea 
 name="address"
-maxlength="70"
-oninput="this.value = this.value.slice(0,70)"
+maxlength="100"
+oninput="this.value = this.value.slice(0,100)"
 ><%= typeof data !== 'undefined' ? data.address : '' %></textarea>
 
 <% if (typeof data !== "undefined" && data.photo) { %>
