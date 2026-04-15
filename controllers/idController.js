@@ -123,7 +123,7 @@ await page.setContent(`
 }
 
 @page {
-  size: 50mm 89mm;
+  size: 50mm 87mm;
   margin: 0;
 }
 
@@ -131,7 +131,7 @@ html, body{
   margin:0;
   padding:0;
   width:50mm;
-  height:89mm;
+  height:87mm;
   overflow:hidden;
   display:flex;
   justify-content:center;
@@ -550,7 +550,7 @@ font-size:9px;
 await page.pdf({
   path: filePath,
   width: '49mm',
-  height: '85mm',
+  height: '87mm',
   landscape: false,
   margin: 0,
   printBackground: true

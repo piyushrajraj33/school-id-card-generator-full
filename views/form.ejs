@@ -207,6 +207,7 @@ footer{
 </div>
 
 </header>
+</a>
 
 <div class="page">
 
@@ -247,8 +248,8 @@ Upload
 <input name="name" 
 required
 value="<%= typeof data !== 'undefined' ? data.name : '' %>"
-maxlength="30" 
-oninput="this.value = this.value.slice(0,30)">
+maxlength="35" 
+oninput="this.value = this.value.slice(0,35)">
 
 <div class="grid3">
 
@@ -312,14 +313,14 @@ value="<%= typeof data !== 'undefined' ? data.roll : '' %>">
 <label>Mother's Name</label>
 <input name="mother"
 value="<%= typeof data !== 'undefined' ? data.mother : '' %>"
-maxlength="20" 
-oninput="this.value = this.value.slice(0,20)">
+maxlength="25" 
+oninput="this.value = this.value.slice(0,25)">
 
 <label>Father's Name</label>
 <input name="father"
 value="<%= typeof data !== 'undefined' ? data.father : '' %>"
-maxlength="20" 
-oninput="this.value = this.value.slice(0,20)">
+maxlength="25" 
+oninput="this.value = this.value.slice(0,25)">
 
 <label>Contact</label>
 <input type="tel" name="contact" required
