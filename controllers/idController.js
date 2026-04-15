@@ -123,15 +123,15 @@ await page.setContent(`
 }
 
 @page {
-  size: 53mm 85mm;
+  size: 54mm 86mm;
   margin: 0;
 }
 
 html, body{
   margin:0;
   padding:0;
-  width:53mm;
-  height:85mm;
+  width:54mm;
+  height:86mm;
   overflow:hidden;
   display:flex;
   justify-content:center;
@@ -155,7 +155,7 @@ background:white;
 border-radius:14px;
 box-shadow:0 8px 14px rgba(0,0,0,0.12);
 overflow:hidden;
-transform: scale(0.69);   /* 🔥 increase from 0.5 → 0.9 */
+transform: scale(0.71);   /* 🔥 increase from 0.5 → 0.9 */
 transform-origin: center;
 /* 🔥 CRITICAL */
 page-break-inside:avoid;
@@ -549,8 +549,8 @@ font-size:9px;
 
 await page.pdf({
   path: filePath,
-  width: '53mm',
-  height: '85mm',
+  width: '54mm',
+  height: '86mm',
   landscape: false,
   margin: 0,
   printBackground: true
