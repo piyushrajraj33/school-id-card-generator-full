@@ -239,7 +239,7 @@ footer{
 
 <label class="upload-btn">
 Upload
-<input type="file" name="photo" id="photoInput" hidden required>
+<input type="file" name="photo" id="photoInput" hidden <%= (typeof data !== 'undefined' && data.photo) ? '' : 'required' %>>
 </label>
 
 </div>
@@ -256,10 +256,10 @@ oninput="this.value = this.value.slice(0,35)">
 <div>
 <label>Class</label>
 <select name="class">
-<option>Select</option>
-<option>M1</option>
-<option>M2</option>
-<option>M3</option>
+<option value="">Select</option>
+<option value="M1" <%= (typeof data !== 'undefined' && data.class == 'M1') ? 'selected' : '' %>>M1</option>
+<option value="M2" <%= (typeof data !== 'undefined' && data.class == 'M2') ? 'selected' : '' %>>M2</option>
+<option value="M3" <%= (typeof data !== 'undefined' && data.class == 'M3') ? 'selected' : '' %>>M3</option>
 <% for(let i=1;i<=12;i++){ %>
 <option value="<%= i %>" <%= (typeof data !== 'undefined' && data.class == i) ? 'selected' : '' %>>
 <%= i %>
@@ -332,8 +332,8 @@ value="<%= typeof data !== 'undefined' ? data.contact : '' %>">
 <label>Address</label>
 <textarea 
 name="address"
-maxlength="100"
-oninput="this.value = this.value.slice(0,100)"
+maxlength="85"
+oninput="this.value = this.value.slice(0,85)"
 ><%= typeof data !== 'undefined' ? data.address : '' %></textarea>
 
 <% if (typeof data !== "undefined" && data.photo) { %>

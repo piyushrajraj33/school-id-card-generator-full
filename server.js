@@ -9,6 +9,7 @@ app.use(express.static("public"));
 app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname,'public')))
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
 
 app.use('/',studentRoutes)
 app.use('/idcards', express.static('idcards'))
@@ -17,7 +18,7 @@ const adminRoutes = require('./routes/admin')
 
 const basicAuth = (req, res, next) => {
   const user = 'admin'
-  const pass = '1234'
+  const pass = 'GenerateMyId!@#123'
 
   const auth = req.headers.authorization
 

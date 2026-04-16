@@ -601,37 +601,83 @@ await browser.close()
 // SAVE IN DATABASE
 // =======================
 
-const sql = `
-INSERT INTO students
-(name,class,section,roll,house,blood,father,mother,contact,address,photo,pdf,date)
-VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
-`
+const checkSql = `SELECT * FROM students WHERE class=? AND section=? AND roll=?`
 
-db.run(sql,[
-data.name,
-data.class,
-data.section,
-data.roll,
-data.house,
-data.blood,
-data.father,
-data.mother,
-data.contact,
-data.address,
-photo,
-filePath,
-new Date().toLocaleDateString()
-],function(err){
+db.get(checkSql,[data.class,data.section,data.roll],(err,row)=>{
+  if(err){
+    console.log(err)
+    return res.send("Database Error")
+  }
 
-if(err){
-console.log(err)
-return res.send("Database Error")
-}
+  const now = new Date().toLocaleDateString()
 
-console.log("Student saved with ID:",this.lastID)
+  if(row){
+    if(row.pdf && row.pdf !== filePath && fs.existsSync(row.pdf)){
+      try { fs.unlinkSync(row.pdf) } catch(e) { console.log('Failed to remove old PDF:', e) }
+    }
 
-res.render("success",{data:data,pdf:filePath})
+    const updateSql = `
+    UPDATE students SET
+    name=?, class=?, section=?, roll=?, house=?, blood=?, father=?, mother=?, contact=?, address=?, photo=?, pdf=?, date=?
+    WHERE class=? AND section=? AND roll=?
+    `
 
+    db.run(updateSql,[
+      data.name,
+      data.class,
+      data.section,
+      data.roll,
+      data.house,
+      data.blood,
+      data.father,
+      data.mother,
+      data.contact,
+      data.address,
+      photo,
+      filePath,
+      now,
+      data.class,
+      data.section,
+      data.roll
+    ],function(err){
+      if(err){
+        console.log(err)
+        return res.send("Database Error")
+      }
+
+      res.render("success",{data:data,pdf:filePath})
+    })
+  } else {
+    const sql = `
+    INSERT INTO students
+    (name,class,section,roll,house,blood,father,mother,contact,address,photo,pdf,date)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+    `
+
+    db.run(sql,[
+      data.name,
+      data.class,
+      data.section,
+      data.roll,
+      data.house,
+      data.blood,
+      data.father,
+      data.mother,
+      data.contact,
+      data.address,
+      photo,
+      filePath,
+      now
+    ],function(err){
+      if(err){
+        console.log(err)
+        return res.send("Database Error")
+      }
+
+      console.log("Student saved with ID:",this.lastID)
+      res.render("success",{data:data,pdf:filePath})
+    })
+  }
 })
 
 }

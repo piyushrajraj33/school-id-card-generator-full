@@ -1,126 +1,247 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Dashboard</title>
+  <title>Advanced Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="bg-gray-100 p-6">
+<body class="bg-gray-900 text-gray-100 p-4 md:p-6">
 
 <div class="max-w-7xl mx-auto">
 
   <!-- HEADER -->
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold">Admin Dashboard</h1>
-
-    <a href="/admin/download-all" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow">
-      Download All PDFs
-    </a>
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-4xl font-bold text-white mb-2">Admin Dashboard</h1>
+      <p class="text-gray-400">Manage student ID cards and records</p>
+    </div>
+    <div class="flex gap-3">
+      <a href="/admin/download-all" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition">
+        📦 Download All
+      </a>
+    </div>
   </div>
 
-  <!-- FILTERS -->
-  <form method="GET" class="bg-white p-4 rounded-xl shadow mb-6 flex gap-4 flex-wrap">
+  <!-- STATISTICS -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-6 rounded-lg shadow">
+      <p class="text-gray-300 text-sm">Total Records</p>
+      <p class="text-3xl font-bold mt-2"><%= totalRecords %></p>
+    </div>
+    <div class="bg-gradient-to-br from-green-600 to-green-800 p-6 rounded-lg shadow">
+      <p class="text-gray-300 text-sm">Classes</p>
+      <p class="text-3xl font-bold mt-2" id="classCount">-</p>
+    </div>
+    <div class="bg-gradient-to-br from-purple-600 to-purple-800 p-6 rounded-lg shadow">
+      <p class="text-gray-300 text-sm">Houses</p>
+      <p class="text-3xl font-bold mt-2" id="houseCount">-</p>
+    </div>
+    <div class="bg-gradient-to-br from-orange-600 to-orange-800 p-6 rounded-lg shadow">
+      <p class="text-gray-300 text-sm">Visible</p>
+      <p class="text-3xl font-bold mt-2"><span id="visibleCount"><%= totalRecords %></span></p>
+    </div>
+  </div>
 
-    <input 
-      type="text" 
-      name="search" 
-      placeholder="Search by name"
-      value="<%= filters.search || '' %>"
-      class="border p-2 rounded w-60"
-    >
+  <!-- ADVANCED FILTERS -->
+  <div class="bg-gray-800 p-6 rounded-xl shadow-lg mb-6 border border-gray-700">
+    <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🔍 Advanced Filters</h2>
+    
+    <form method="GET" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
 
-    <select name="class" class="border p-2 rounded">
-      <option value="">All Classes</option>
-      <option value="M1">M1</option>
-      <option value="M2">M2</option>
-      <option value="M3">M3</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
+      <input 
+        type="text" 
+        name="search" 
+        placeholder="Search name, father, mother"
+        value="<%= filters.search || '' %>"
+        class="bg-gray-700 border border-gray-600 p-3 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+      >
 
-    </select>
+      <input 
+        type="text" 
+        name="roll" 
+        placeholder="Roll number"
+        value="<%= filters.roll || '' %>"
+        class="bg-gray-700 border border-gray-600 p-3 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+      >
 
-    <select name="section" class="border p-2 rounded">
-      <option value="">All Sections</option>
-      <option value="A">A</option>
-      <option value="B">B</option>
-      <option value="C">C</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-    </select>
+      <select name="class" class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500">
+        <option value="">All Classes</option>
+        <option value="M1" <%= filters.class === 'M1' ? 'selected' : '' %>>M1</option>
+        <option value="M2" <%= filters.class === 'M2' ? 'selected' : '' %>>M2</option>
+        <option value="M3" <%= filters.class === 'M3' ? 'selected' : '' %>>M3</option>
+        <option value="1" <%= filters.class === '1' ? 'selected' : '' %>>1</option>
+        <option value="2" <%= filters.class === '2' ? 'selected' : '' %>>2</option>
+        <option value="3" <%= filters.class === '3' ? 'selected' : '' %>>3</option>
+        <option value="4" <%= filters.class === '4' ? 'selected' : '' %>>4</option>
+        <option value="5" <%= filters.class === '5' ? 'selected' : '' %>>5</option>
+        <option value="6" <%= filters.class === '6' ? 'selected' : '' %>>6</option>
+        <option value="7" <%= filters.class === '7' ? 'selected' : '' %>>7</option>
+        <option value="8" <%= filters.class === '8' ? 'selected' : '' %>>8</option>
+        <option value="9" <%= filters.class === '9' ? 'selected' : '' %>>9</option>
+        <option value="10" <%= filters.class === '10' ? 'selected' : '' %>>10</option>
+        <option value="11" <%= filters.class === '11' ? 'selected' : '' %>>11</option>
+        <option value="12" <%= filters.class === '12' ? 'selected' : '' %>>12</option>
+      </select>
 
-     <select name="house" class="border p-2 rounded">
-      <option value="">All Houses</option>
-      <option value="RED">RED</option>
-      <option value="BLUE">BLUE</option>
-      <option value="GREEN">GREEN</option>
-      <option value="YELLOW">YELLOW</option>
-    </select>
+      <select name="section" class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500">
+        <option value="">All Sections</option>
+        <option value="A" <%= filters.section === 'A' ? 'selected' : '' %>>A</option>
+        <option value="B" <%= filters.section === 'B' ? 'selected' : '' %>>B</option>
+        <option value="C" <%= filters.section === 'C' ? 'selected' : '' %>>C</option>
+        <option value="D" <%= filters.section === 'D' ? 'selected' : '' %>>D</option>
+        <option value="E" <%= filters.section === 'E' ? 'selected' : '' %>>E</option>
+      </select>
 
-    <button class="bg-green-600 text-white px-4 py-2 rounded">
-      Apply
-    </button>
+      <select name="house" class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500">
+        <option value="">All Houses</option>
+        <option value="RED" <%= filters.house === 'RED' ? 'selected' : '' %>>🔴 RED</option>
+        <option value="BLUE" <%= filters.house === 'BLUE' ? 'selected' : '' %>>🔵 BLUE</option>
+        <option value="GREEN" <%= filters.house === 'GREEN' ? 'selected' : '' %>>🟢 GREEN</option>
+        <option value="YELLOW" <%= filters.house === 'YELLOW' ? 'selected' : '' %>>🟡 YELLOW</option>
+      </select>
 
-  </form>
+      <select name="blood" class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500">
+        <option value="">All Blood Types</option>
+        <option value="O+" <%= filters.blood === 'O+' ? 'selected' : '' %>>O+</option>
+        <option value="O-" <%= filters.blood === 'O-' ? 'selected' : '' %>>O-</option>
+        <option value="A+" <%= filters.blood === 'A+' ? 'selected' : '' %>>A+</option>
+        <option value="A-" <%= filters.blood === 'A-' ? 'selected' : '' %>>A-</option>
+        <option value="B+" <%= filters.blood === 'B+' ? 'selected' : '' %>>B+</option>
+        <option value="B-" <%= filters.blood === 'B-' ? 'selected' : '' %>>B-</option>
+        <option value="AB+" <%= filters.blood === 'AB+' ? 'selected' : '' %>>AB+</option>
+        <option value="AB-" <%= filters.blood === 'AB-' ? 'selected' : '' %>>AB-</option>
+      </select>
+
+      <input 
+        type="date" 
+        name="dateFrom" 
+        value="<%= filters.dateFrom || '' %>"
+        class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500"
+      >
+
+      <input 
+        type="date" 
+        name="dateTo" 
+        value="<%= filters.dateTo || '' %>"
+        class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500"
+      >
+
+      <select name="sortBy" class="bg-gray-700 border border-gray-600 p-3 rounded text-white focus:outline-none focus:border-blue-500">
+        <option value="">Latest First</option>
+        <option value="asc" <%= filters.sortBy === 'asc' ? 'selected' : '' %>>Oldest First</option>
+      </select>
+
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded transition font-semibold">
+        🔄 Apply Filters
+      </button>
+    </form>
+
+    <a href="/admin" class="text-blue-400 hover:text-blue-300 text-sm">↺ Reset Filters</a>
+  </div>
+
+  <!-- BULK ACTIONS -->
+  <div class="bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-700 mb-6 flex flex-wrap gap-3 items-center">
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input type="checkbox" id="selectAll" class="w-4 h-4 rounded">
+      <span>Select All</span>
+    </label>
+    <span class="text-gray-500">|</span>
+    <span class="text-sm text-gray-400"><span id="selectedCount">0</span> selected</span>
+    <span class="text-gray-500">|</span>
+    
+    <div class="flex gap-2 flex-wrap">
+      <button onclick="exportData('csv')" class="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-2 rounded text-sm transition">
+        📄 Export CSV
+      </button>
+      <button onclick="exportData('excel')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded text-sm transition">
+        📊 Export Excel
+      </button>
+      <button onclick="bulkDelete()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-sm transition" id="bulkDeleteBtn">
+        🗑️ Bulk Delete
+      </button>
+    </div>
+  </div>
 
   <!-- TABLE -->
-  <div class="bg-white rounded-xl shadow overflow-x-auto">
+  <div class="bg-gray-800 rounded-xl shadow-lg overflow-x-auto border border-gray-700">
 
     <table class="w-full text-sm">
 
-      <thead class="bg-gray-200 text-gray-700">
+      <thead class="bg-gray-700 text-gray-200 sticky top-0">
         <tr>
-          <th class="p-3">ID</th>
-          <th>Name</th>
-          <th>Class</th>
-          <th>Section</th>
-          <th>House Colour</th>
-          <th>Actions</th>
+          <th class="p-3 text-left">
+            <input type="checkbox" class="row-checkbox" id="headerCheckbox" onclick="toggleAll(this)">
+          </th>
+          <th class="p-3 text-left">ID</th>
+          <th class="p-3 text-left">Name</th>
+          <th class="p-3 text-left">Class</th>
+          <th class="p-3 text-left">Roll</th>
+          <th class="p-3 text-left">House</th>
+          <th class="p-3 text-left">Blood</th>
+          <th class="p-3 text-left">Contact</th>
+          <th class="p-3 text-left">Date</th>
+          <th class="p-3 text-left">Actions</th>
         </tr>
       </thead>
 
       <tbody>
 
-      <% students.forEach(s => { %>
-        <tr class="border-b hover:bg-gray-50">
+      <% if (students && students.length > 0) { %>
+        <% students.forEach(s => { %>
+          <tr class="border-b border-gray-700 hover:bg-gray-750 transition row-item">
 
-          <td class="p-3"><%= s.id %></td>
-          <td><%= s.name %></td>
-          <td><%= s.class %></td>
-          <td><%= s.section %></td>
-          <td><%= s.house %></td>
+            <td class="p-3">
+              <input type="checkbox" class="row-checkbox" value="<%= s.id %>" onchange="updateSelectedCount()">
+            </td>
+            <td class="p-3 text-blue-400">#<%= s.id %></td>
+            <td class="p-3 font-semibold"><%= s.name %></td>
+            <td class="p-3"><span class="bg-blue-900 px-2 py-1 rounded"><%= s.class %></span></td>
+            <td class="p-3"><%= s.roll || '-' %></td>
+            <td class="p-3">
+              <% if(s.house === 'RED') { %>
+                <span class="bg-red-900 text-red-200 px-2 py-1 rounded">🔴 <%= s.house %></span>
+              <% } else if(s.house === 'BLUE') { %>
+                <span class="bg-blue-900 text-blue-200 px-2 py-1 rounded">🔵 <%= s.house %></span>
+              <% } else if(s.house === 'GREEN') { %>
+                <span class="bg-green-900 text-green-200 px-2 py-1 rounded">🟢 <%= s.house %></span>
+              <% } else if(s.house === 'YELLOW') { %>
+                <span class="bg-yellow-900 text-yellow-200 px-2 py-1 rounded">🟡 <%= s.house %></span>
+              <% } %>
+            </td>
+            <td class="p-3"><span class="bg-gray-700 px-2 py-1 rounded text-sm"><%= s.blood || '-' %></span></td>
+            <td class="p-3 text-xs"><%= s.contact || '-' %></td>
+            <td class="p-3 text-xs text-gray-400"><%= s.date ? new Date(s.date).toLocaleDateString() : '-' %></td>
 
-          <td class="space-x-2">
+            <td class="p-3">
+              <div class="flex gap-1">
+                <a href="/admin/edit/<%= s.id %>" 
+                   class="bg-yellow-600 hover:bg-yellow-700 px-2 py-1 rounded text-white text-xs transition">
+                   ✏️
+                </a>
 
-            <a href="/admin/edit/<%= s.id %>" 
-               class="bg-yellow-400 px-3 py-1 rounded text-white">
-               Edit
-            </a>
+                <a href="/admin/delete/<%= s.id %>" 
+                   onclick="return confirm('Delete this record?')"
+                   class="bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-white text-xs transition">
+                   🗑️
+                </a>
 
-            <a href="/admin/delete/<%= s.id %>" 
-               onclick="return confirm('Delete?')"
-               class="bg-red-500 px-3 py-1 rounded text-white">
-               Delete
-            </a>
+                <a href="/<%= s.pdf %>" target="_blank"
+                   class="bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-white text-xs transition">
+                   👁️
+                </a>
+              </div>
+            </td>
 
-            <a href="/<%= s.pdf %>" target="_blank"
-               class="bg-blue-500 px-3 py-1 rounded text-white">
-               View
-            </a>
-
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="10" class="p-6 text-center text-gray-400">
+            No records found. Try adjusting your filters.
           </td>
-
         </tr>
-      <% }) %>
+      <% } %>
 
       </tbody>
 
@@ -129,6 +250,78 @@
   </div>
 
 </div>
+
+<script>
+// Toggle All Checkboxes
+function toggleAll(checkbox) {
+  const checkboxes = document.querySelectorAll('.row-checkbox:not(#headerCheckbox)');
+  checkboxes.forEach(cb => {
+    cb.checked = checkbox.checked;
+  });
+  updateSelectedCount();
+}
+
+// Update Selected Count
+function updateSelectedCount() {
+  const selected = document.querySelectorAll('.row-checkbox:not(#headerCheckbox):checked').length;
+  document.getElementById('selectedCount').textContent = selected;
+  document.getElementById('bulkDeleteBtn').disabled = selected === 0;
+}
+
+// Export Data
+function exportData(format) {
+  const params = new URLSearchParams(window.location.search);
+  const path = format === 'csv' ? '/admin/export/csv' : '/admin/export/excel';
+  window.location.href = path + '?' + params.toString();
+}
+
+// Bulk Delete
+function bulkDelete() {
+  const selected = Array.from(document.querySelectorAll('.row-checkbox:not(#headerCheckbox):checked'))
+    .map(cb => cb.value);
+
+  if (selected.length === 0) {
+    alert('Please select records to delete');
+    return;
+  }
+
+  if (!confirm(`Delete ${selected.length} record(s)? This action cannot be undone.`)) {
+    return;
+  }
+
+  fetch('/admin/bulk-delete', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ids: selected.map(id => parseInt(id)) })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert(data.message);
+      location.reload();
+    } else {
+      alert('Error: ' + data.message);
+    }
+  })
+  .catch(err => alert('Error: ' + err))
+}
+
+// Load Statistics
+fetch('/admin/stats')
+  .then(res => res.json())
+  .then(data => {
+    if (data.total !== undefined) {
+      document.getElementById('classCount').textContent = data.byClass.length;
+      document.getElementById('houseCount').textContent = data.byHouse.length;
+    }
+  })
+  .catch(err => console.log('Stats error:', err))
+
+// Update visible count
+document.getElementById('visibleCount').textContent = document.querySelectorAll('.row-item').length;
+</script>
 
 </body>
 </html>
