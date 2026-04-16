@@ -470,17 +470,16 @@ min-height:18px;
 flex-shrink:0;
 }
 
-/* LEFT SIDE */
 .academicyear{
 display:flex;
-align-items:flex-end;
-min-width:0;
+flex-direction:column;   /* 🔥 THIS IS KEY */
+align-items:flex-start;
 }
+
 .academicyear p{
 margin:0;
-line-height:1.0;
-font-size:7px;
-white-space:nowrap;
+line-height:1.1;
+white-space:normal;      /* 🔥 allow line break */
 }
 
 .principal{
@@ -564,7 +563,8 @@ width:100%;
 <div class="card-footer">
 
 <div class="academicyear">
-<p>Valid for Academic Year 2026-2027</p>
+  <p>Valid for Academic</p>
+  <p>Year 2026-2027</p>
 </div>
 
 <div class="principal">
